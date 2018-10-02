@@ -8,11 +8,11 @@
 
 class BuscaCEP
 {
-    private $url = "viacep.com.br/ws/%s/json/";
+    private static $url = "viacep.com.br/ws/%s/json/";
 
-    public function find($cep)
+    public static function find($cep)
     {
-        $url = $this->mountURL($cep);
+        $url = self::mountURL($cep);
 
         $ch = curl_init();
 
@@ -26,10 +26,10 @@ class BuscaCEP
         return json_decode($result, true);
     }
 
-    private function mountURL($cep)
+    private static function mountURL($cep)
     {
         $cep = str_replace('-', '', $cep);
-        $url = sprintf($this->url, $cep);
+        $url = sprintf(self::$url, $cep);
 
         return $url;
     }
