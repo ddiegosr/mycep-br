@@ -8,7 +8,7 @@
 
 class BuscaCEP
 {
-    private $url = "viacep.com.br/ws/{cep}/json/";
+    private $url = "viacep.com.br/ws/%s/json/";
 
     public function find($cep)
     {
@@ -29,8 +29,7 @@ class BuscaCEP
     private function mountURL($cep)
     {
         $cep = str_replace('-', '', $cep);
-        $url = $this->url;
-        $url = str_replace('{cep}', $cep, $url);
+        $url = sprintf($this->url, $cep);
 
         return $url;
     }
